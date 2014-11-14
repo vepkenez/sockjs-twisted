@@ -63,13 +63,3 @@ setup(
         "Topic :: Internet",
     ],
 )
-
-# Make Twisted regenerate the dropin.cache, if possible.  This is necessary
-# because in a site-wide install, dropin.cache cannot be rewritten by
-# normal users.
-try:
-    from twisted.plugin import IPlugin, getPlugins
-    list(getPlugins(IPlugin))
-except Exception, e:
-    log.warn("*** Failed to update Twisted plugin cache. ***")
-    log.warn(str(e))
