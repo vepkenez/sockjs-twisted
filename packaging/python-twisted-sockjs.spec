@@ -51,6 +51,9 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib/python2.6/site-packages
 
 %changelog
+* Wed Nov 19 2014 Julien Tagneres <jtag@interact-iv.com> 1.2.1-8
+- Fixed connection loss not being detected.
+
 * Mon Oct 27 2014 Julien Tagneres <jtag@interact-iv.com> 1.2.1-1
 - First attempt at building python-twisted-sockjs.
 - Merged pull request #15 from frog32 (websocket Heartbeat).
