@@ -1,6 +1,6 @@
 Name:		python-twisted-sockjs
-Version:	%{pkg_version}
-Release:	%{pkg_release}%{?dist}
+Version:	%{_iv_pkg_version}
+Release:	%{_iv_pkg_release}%{?dist}
 Summary:	A simple library for adding SockJS support to your twisted application.
 
 %define		_package_	%{name}-%{version}
