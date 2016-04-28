@@ -51,6 +51,9 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib/python2.6/site-packages
 
 %changelog
+* Thu Apr 28 2016 Julien Tagneres <jtag@interact-iv.com> 1.2.2
+- Added reason to timeout related disconnections.
+
 * Wed Apr 13 2016 Julien Tagneres <jtag@interact-iv.com> 1.2.1-9
 - Fixed connection close reason not being forwarded.
 
