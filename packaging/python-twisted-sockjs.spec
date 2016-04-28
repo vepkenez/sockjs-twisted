@@ -51,6 +51,9 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib/python2.6/site-packages
 
 %changelog
+* Wed Apr 13 2016 Julien Tagneres <jtag@interact-iv.com> 1.2.1-9
+- Fixed connection close reason not being forwarded.
+
 * Wed Nov 19 2014 Julien Tagneres <jtag@interact-iv.com> 1.2.1-8
 - Fixed connection loss not being detected.
 
