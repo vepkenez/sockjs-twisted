@@ -93,7 +93,7 @@ class Stub(ProtocolWrapper):
         self.protocol = None # Downstream (Wrapped Factory)
         self.peer = None
         self.host = None
-        self.timeout = reactor.callLater(self.parent._options['timeout'], self.disconnect)
+        self.timeout = reactor.callLater(self.parent._options['timeout'], self.disconnect, "timeout")
         self.heartbeat_timer = reactor.callLater(self.parent._options['heartbeat'], self.heartbeat)
     
     def makeConnection(self, transport):
@@ -140,7 +140,7 @@ class Stub(ProtocolWrapper):
     def transportLeft(self):
         self.transport = None
         self.attached = False
-        self.timeout = reactor.callLater(self.parent._options['timeout'], self.disconnect)
+        self.timeout = reactor.callLater(self.parent._options['timeout'], self.disconnect, "timeout")
     
     def write(self, data):
         data = normalize(data, self.parent._options['encoding'])
