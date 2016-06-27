@@ -1,6 +1,6 @@
 # Copyright (c) 2012, Christopher Gamble
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
 #    * Redistributions of source code must retain the above copyright
@@ -8,12 +8,12 @@
 #    * Redistributions in binary form must reproduce the above copyright
 #      notice, this list of conditions and the following disclaimer in the
 #      documentation and/or other materials provided with the distribution.
-#    * Neither the name of the Christopher Gamble nor the names of its 
-#      contributors may be used to endorse or promote products derived 
+#    * Neither the name of the Christopher Gamble nor the names of its
+#      contributors may be used to endorse or promote products derived
 #      from this software without specific prior written permission.
 #
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 # WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
 # IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
 # INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
@@ -36,7 +36,7 @@ class Info(resource.Resource):
             'entropy': random.randint(0,2**32-1)
         }
         return json.dumps(data)
-    
+
     def render_OPTIONS(self, request):
         request.setResponseCode(http.NO_CONTENT)
         self.parent.setBaseHeaders(request,False)
@@ -74,4 +74,7 @@ class IFrame(resource.Resource):
   <h2>Don't panic!</h2>
   <p>This is a SockJS hidden iframe. It's used for cross domain magic.</p>
 </body>
-</html>'''.format(self.parent._options["sockjs_url"])
+</html>'''.format(self.parent._options.get(
+    "sockjs_url",
+    "https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.min.js"
+))
