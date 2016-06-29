@@ -74,7 +74,6 @@ class IFrame(resource.Resource):
   <h2>Don't panic!</h2>
   <p>This is a SockJS hidden iframe. It's used for cross domain magic.</p>
 </body>
-</html>'''.format(self.parent._options.get(
-    "sockjs_url",
-    "https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.min.js"
-))
+</html>'''.format(
+    self.parent._options.get("sockjs_url") or "https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.min.js"
+)
