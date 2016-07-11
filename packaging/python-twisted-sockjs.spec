@@ -51,6 +51,10 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib/python2.6/site-packages
 
 %changelog
+* Mon Jul 11 2016 Julien Tagneres <jtag@interact-iv.com> 1.2.2-2
+- Changed default sockjs_url value and made sure an url is inserted even if
+the option is missing (different class).
+
 * Thu Apr 28 2016 Julien Tagneres <jtag@interact-iv.com> 1.2.2
 - Added reason to timeout related disconnections.
 
