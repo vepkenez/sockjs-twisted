@@ -66,14 +66,14 @@ class IFrame(resource.Resource):
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <script>
     document.domain = document.domain;
-    _sockjs_onload = function(){{SockJS.bootstrap_iframe();}};
+    _sockjs_onload = function(){SockJS.bootstrap_iframe();};
   </script>
-  <script src="{}"></script>
+  <script src="%s"></script>
 </head>
 <body>
   <h2>Don't panic!</h2>
   <p>This is a SockJS hidden iframe. It's used for cross domain magic.</p>
 </body>
-</html>'''.format(
-    self.parent._options.get("sockjs_url") or "https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.min.js"
+</html>''' % (
+    self.parent._options.get("sockjs_url") or "https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.min.js",
 )
