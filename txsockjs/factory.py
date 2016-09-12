@@ -1,6 +1,6 @@
 # Copyright (c) 2012, Christopher Gamble
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
 #    * Redistributions of source code must retain the above copyright
@@ -8,12 +8,12 @@
 #    * Redistributions in binary form must reproduce the above copyright
 #      notice, this list of conditions and the following disclaimer in the
 #      documentation and/or other materials provided with the distribution.
-#    * Neither the name of the Christopher Gamble nor the names of its 
-#      contributors may be used to endorse or promote products derived 
+#    * Neither the name of the Christopher Gamble nor the names of its
+#      contributors may be used to endorse or promote products derived
 #      from this software without specific prior written permission.
 #
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 # WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
 # IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
 # INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
@@ -39,7 +39,7 @@ class SockJSFactory(server.Site):
 class SockJSMultiFactory(server.Site):
     def __init__(self):
         server.Site.__init__(self, resource.Resource())
-    
+
     def addFactory(self, factory, prefix, options = None):
         self.resource.putChild(prefix, SockJSResource(factory, options))
 
@@ -55,7 +55,7 @@ class SockJSResource(resource.Resource):
             'timeout': 5,
             'streaming_limit': 128 * 1024,
             'encoding': 'cp1252', #Latin1
-            'sockjs_url': 'https://d1fxtkz8shb9d2.cloudfront.net/sockjs-0.3.js',
+            'sockjs_url': 'https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.min.js',
             'proxy_header': None
         }
         if options is not None:
@@ -78,7 +78,7 @@ class SockJSResource(resource.Resource):
         # Since it's constant, we can declare the websocket handler up here
         self._websocket = WebSocket()
         self._websocket.parent = self
-    
+
     def getChild(self, name, request):
         # Check if it is the greeting url
         if not name and not request.postpath:
@@ -108,11 +108,11 @@ class SockJSResource(resource.Resource):
             self._sessions[session] = Stub(self, session)
         # Delegate request to appropriate handler
         return self._methods[name](self, self._sessions[session] if request.method != "OPTIONS" else None)
-    
+
     def putChild(self, path, child):
         child.parent = self
         resource.Resource.putChild(self, path, child)
-    
+
     def setBaseHeaders(self, request, cookie=True):
         origin = request.getHeader("Origin")
         headers = request.getHeader('Access-Control-Request-Headers')
@@ -126,7 +126,7 @@ class SockJSResource(resource.Resource):
         if self._options["cookie_needed"] and cookie:
             cookie = request.getCookie("JSESSIONID") if request.getCookie("JSESSIONID") else "dummy"
             request.addCookie("JSESSIONID", cookie, path="/")
-    
+
     def render_GET(self, request):
         self.setBaseHeaders(request,False)
         request.setHeader('content-type', 'text/plain; charset=UTF-8')
