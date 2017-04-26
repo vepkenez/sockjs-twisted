@@ -51,6 +51,13 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib/python2.6/site-packages
 
 %changelog
+* Wed Nov 30 2016 Julien Tagneres <jtag@interact-iv.com> 1.2.2-4
+- Fixed hardcoded 5 seconds timeout.
+
+* Mon Sep 12 2016 Julien Tagneres <jtag@interact-iv.com> 1.2.2-3
+- Fixed default sockjs_url value for python2.6 (incompatibility with format).
+- Fixed issue in writeSequence (attempt to modify a tuple).
+
 * Mon Jul 11 2016 Julien Tagneres <jtag@interact-iv.com> 1.2.2-2
 - Changed default sockjs_url value and made sure an url is inserted even if
 the option is missing (different class).

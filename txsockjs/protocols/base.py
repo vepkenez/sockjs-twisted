@@ -188,7 +188,7 @@ class Stub(ProtocolWrapper):
     
     def dataReceived(self, data):
         if self.timeout.active():
-            self.timeout.reset(5)
+            self.timeout.reset(self.parent._options['timeout'])
         if data == '':
             return "Payload expected."
         try:
