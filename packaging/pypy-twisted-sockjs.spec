@@ -45,7 +45,7 @@ pypy -c 'from twisted.plugin import IPlugin, getPlugins; list(getPlugins(IPlugin
 rm -rf $RPM_BUILD_ROOT
 
 %files
-/usr/lib/python2.6/site-packages
+/opt/pypy/site-packages
 
 %changelog
 * Thu Aug 03 2017 Julien Tagneres <jtag@interact-iv.com> 1.2.2-5
