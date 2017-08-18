@@ -48,6 +48,9 @@ rm -rf $RPM_BUILD_ROOT
 /opt/pypy/site-packages
 
 %changelog
+* Fri Aug 18 2017 Julien Tagneres <jtag@interact-iv.com> 1.2.2-6
+- Final pypy release.
+
 * Thu Aug 03 2017 Julien Tagneres <jtag@interact-iv.com> 1.2.2-5
 - First attempt at packaging with pypy.
 - Fixed compatibility issues with pypy.
