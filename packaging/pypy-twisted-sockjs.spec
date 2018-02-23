@@ -48,6 +48,9 @@ rm -rf $RPM_BUILD_ROOT
 /opt/pypy/site-packages
 
 %changelog
+* Fri Feb 23 2018 Julien Tagneres <jtag@interact-iv.com> 1.2.2-7
+- Added custom abortConnection.
+
 * Fri Aug 18 2017 Julien Tagneres <jtag@interact-iv.com> 1.2.2-6
 - Final pypy release.
 
