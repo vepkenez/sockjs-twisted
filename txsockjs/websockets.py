@@ -253,6 +253,7 @@ def _parseFrames(buf):
             if len(data) >= 2:
                 # Gotta unpack the opcode and return usable data here.
                 data = unpack(">H", data[:2])[0], data[2:]
+
             else:
                 # No reason given; use generic data.
                 data = 1000, "No reason given"
@@ -304,10 +305,16 @@ class _WebSocketsProtocol(ProtocolWrapper, object):
             elif opcode == _CONTROLS.CLOSE:
                 # The other side wants us to close. I wonder why?
                 reason, text = data
-                log.msg("Closing connection: %r (%d)" % (text, reason))
+                if reason != 4000:
+                    log.msg("Closing connection: %r (%d)" % (text, reason))
 
-                # Close the connection.
-                self.loseConnection()
+                    # Close the connection.
+                    self.loseConnection()
+
+                else:
+                    log.msg("Aborting connection: %r (%d)" % (text, reason))
+                    self.abortConnection()
+
                 return
             elif opcode == _CONTROLS.PING:
                 # 5.5.2 PINGs must be responded to with PONGs.
@@ -375,6 +382,23 @@ class _WebSocketsProtocol(ProtocolWrapper, object):
 
             ProtocolWrapper.loseConnection(self)
 
+    def abortConnection(self):
+        """
+        Abort the connection.
+
+        This includes telling the other side we're aborting the connection.
+
+        If the other side didn't signal that the connection is being aborted,
+        then we might not see their last message, but since their last message
+        should, according to the spec, be a simple acknowledgement, it
+        shouldn't be a problem.
+        """
+        # Send a closing frame. It's only polite. (And might keep the browser
+        # from hanging.)
+        if not self.disconnecting:
+            frame = _makeFrame("", _opcode=_CONTROLS.CLOSE)
+            self.transport.write(frame)
+            self.transport.abortConnection()
 
 
 class _WebSocketsFactory(WrappingFactory):
